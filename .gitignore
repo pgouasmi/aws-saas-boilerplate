@@ -1,3 +1,4 @@
 .env
 setup-worpress-hardcoded.sh
 __pycache__
+terraform-wordpress/
