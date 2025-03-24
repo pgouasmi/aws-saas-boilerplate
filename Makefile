@@ -11,11 +11,33 @@ all: help
 # Variables
 PYTHON = python3
 PIP = pip3
-ENV_FILE = "../.env"
+ENV_FILE = .env
 TF_DIR = terraform-output
 PYTHON_SCRIPT = app/app.py
 INSTALL_DIR = wordpress-install
 INSTALL_SCRIPT = $(INSTALL_DIR)/wordpress-setup.sh
+
+create-venv:
+	@if [ ! -d venv]; then \
+		python3 -m venv venv; \
+		echo "Created venv!\n"; \
+	else \
+		echo "Venv already created!"; \
+	fi
+
+
+activate-venv:
+	@if [ -n "$$VIRTUAL_ENV" ]; then \
+		echo "Venv already Activated!"; \
+	else \
+		source venv/bin/activate; \
+		echo "Activated venv!\n"; \
+	fi
+
+install-deps:
+	pip install -r requirements.txt
+
+setup-venv: create-venv activate-venv install-deps
 
 # Check if .env file exists
 env-check:
