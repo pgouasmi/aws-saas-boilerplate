@@ -2,3 +2,5 @@
 setup-worpress-hardcoded.sh
 __pycache__
 terraform-wordpress/
+venv
+terraform-output
