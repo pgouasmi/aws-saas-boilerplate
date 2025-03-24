@@ -6,3 +6,5 @@ venv
 terraform-output
 *.pem
 terraform
+*.csv
+
