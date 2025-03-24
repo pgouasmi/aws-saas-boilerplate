@@ -4,3 +4,5 @@ __pycache__
 terraform-wordpress/
 venv
 terraform-output
+*.pem
+terraform

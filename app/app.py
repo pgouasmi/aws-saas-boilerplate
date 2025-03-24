@@ -72,6 +72,7 @@ def generate_main_tf(deployment_type, env_vars_formatted):
     
     # Add each component
     for component in components:
+        print(f"current component: {component}")
         if component in TERRAFORM_TEMPLATES:
             try:
                 # Utiliser string substitution au lieu de format() pour éviter les problèmes d'accolades
@@ -266,8 +267,8 @@ def generate_deployment(deployment_type, env_vars, directory=None):
     success = write_terraform_files(configs, directory)
     
     # Write a copy of the .env file
-    if success:
-        write_env_file(env_vars, directory)
+    # if success:
+    #     write_env_file(env_vars, directory)
     
     if success:
         print(f"\nTerraform files for {deployment_type.replace('-', ' ').title()} deployment generated successfully!")
