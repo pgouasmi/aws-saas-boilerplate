@@ -111,6 +111,11 @@ variable "wordpress_db_name" {
   default     = "{wordpress_db_name}"
 }
 
+variable "wordpress_install_path" {
+  type        = string
+  default     = "{wordpress_install_path}"
+}
+
 """
 
 

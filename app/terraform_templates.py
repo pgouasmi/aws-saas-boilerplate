@@ -101,13 +101,17 @@ resource "aws_instance" "wordpress" {
   }
   
   user_data = templatefile("./../wordpress-install/user_data.sh.tpl", {
-    wordpress_db_name = var.wordpress_db_name,
-    wordpress_db_user = var.wordpress_db_user,
-    wordpress_db_password = var.wordpress_db_password,
-    wordpress_site_title = var.wordpress_site_title,
-    wordpress_admin_user = var.wordpress_admin_user,
-    wordpress_admin_password = var.wordpress_admin_password,
-    wordpress_admin_email = var.wordpress_admin_email
+    WORDPRESS_DB_NAME = var.wordpress_db_name,
+    WORDPRESS_DB_USER = var.wordpress_db_user,
+    WORDPRESS_DB_PASSWORD = var.wordpress_db_password,
+    WORDPRESS_SITE_TITLE = var.wordpress_site_title,
+    WORDPRESS_ADMIN_USER = var.wordpress_admin_user,
+    WORDPRESS_ADMIN_PASSWORD = var.wordpress_admin_password,
+    WORDPRESS_ADMIN_EMAIL = var.wordpress_admin_email
+    WORDPRESS_INSTALL_PATH = "/var/www/html"
+    KEYS_LINE_NUM = ""
+    NONCE_SALT_LINE_NUM = ""
+    KEYS = ""
   })
   }
 """,
