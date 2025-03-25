@@ -75,7 +75,43 @@ variable "instance_volume_size" {
   type        = number
   default     = {instance_volume_size}
 }
-""",
+
+variable "wordpress_admin_email" {
+  type        = string
+  default     = "{wordpress_admin_email}"
+}
+
+variable "wordpress_admin_password" {
+  type        = string
+  default     = "{wordpress_admin_password}"
+}
+
+variable "wordpress_admin_user" {
+  type        = string
+  default     = "{wordpress_admin_user}"
+}
+
+variable "wordpress_site_title" {
+  type        = string
+  default     = "{wordpress_site_title}"
+}
+
+variable "wordpress_db_password" {
+  type        = string
+  default     = "{wordpress_db_password}"
+}
+
+variable "wordpress_db_user" {
+  type        = string
+  default     = "{wordpress_db_user}"
+}
+
+variable "wordpress_db_name" {
+  type        = string
+  default     = "{wordpress_db_name}"
+}
+
+"""
 
 
     

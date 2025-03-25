@@ -1,17 +1,4 @@
-USER_DATA_TEMPLATE = {
-    "user_data": """
 #!/bin/bash
-
-
-ENV_FILE="./.env"
-
-if [ ! -f "$ENV_FILE" ]; then
-    echo "Erreur: Le fichier $ENV_FILE n'existe pas."
-    echo "Veuillez créer un fichier .env basé sur le modèle .env.example"
-    exit 1
-fi
-
-source "$ENV_FILE"
 
 LOG_FILE="/var/log/wordpress-install.log"
 
@@ -24,15 +11,14 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-WORDPRESS_DOMAIN="${WORDPRESS_DOMAIN:-$(curl -s https://checkip.amazonaws.com | tr -d '\n')}"
-WORDPRESS_DB_NAME="${wordpress_db_name}"
-WORDPRESS_DB_USER="${wordpress_db_user}"
-WORDPRESS_DB_PASSWORD="${wordpress_db_password}"
-WORDPRESS_SITE_TITLE="${worpress_site_title}"
-WORDPRESS_ADMIN_USER="${wordpress_admin_user}"
-WORDPRESS_ADMIN_PASSWORD="${wordpress_admin_password}"
-WORDPRESS_ADMIN_EMAIL="${wordpress_admin_email}"
-WORDPRESS_INSTALL_PATH="/var/www/html"
+WORDPRESS_DB_NAME="${WORDPRESS_DB_NAME:-wordpress}"
+WORDPRESS_DB_USER="${WORDPRESS_DB_USER:-wordpress}"
+WORDPRESS_DB_PASSWORD="${WORDPRESS_DB_PASSWORD}"
+WORDPRESS_SITE_TITLE="${WORDPRESS_SITE_TITLE:-Mon Site WordPress}"
+WORDPRESS_ADMIN_USER="${WORDPRESS_ADMIN_USER:-admin}"
+WORDPRESS_ADMIN_PASSWORD="${WORDPRESS_ADMIN_PASSWORD}"
+WORDPRESS_ADMIN_EMAIL="${WORDPRESS_ADMIN_EMAIL}"
+WORDPRESS_INSTALL_PATH="${WORDPRESS_INSTALL_PATH:-/var/www/html}"
 
 log "Démarrage de l'installation de WordPress sur Amazon Linux 2023"
 log "Domaine/IP: $WORDPRESS_DOMAIN"
@@ -221,6 +207,3 @@ log "Nom de la base de données: $WORDPRESS_DB_NAME"
 log "Utilisateur de la base de données: $WORDPRESS_DB_USER"
 log "Mot de passe de la base de données: $WORDPRESS_DB_PASSWORD"
 log "Installation terminée avec succès!"
-
-"""
-}

@@ -16,7 +16,7 @@ from datetime import datetime
 from terraform_templates import TERRAFORM_TEMPLATES  # Templates de composants
 from variables_templates import VARIABLE_TEMPLATES   # Templates de variables
 from deployment_templates import DEPLOYMENT_TEMPLATES  # Définitions des déploiements
-from user_data_template import USER_DATA_TEMPLATE
+# from user_data_template import USER_DATA_TEMPLATE
 from env_parser import parse_env_file
 
 # Configuration globale
@@ -359,35 +359,35 @@ def parse_command_line_args():
     parser.add_argument('--interactive', '-i', action='store_true', help='Run in interactive mode (default if no type is specified)')
     return parser.parse_args()
 
-def generate_user_data(env_vars):
-    """Génère le script user_data pour l'instance EC2 en remplaçant les variables."""
+# def generate_user_data(env_vars):
+#     """Génère le script user_data pour l'instance EC2 en remplaçant les variables."""
     
-    if "user_data" not in TERRAFORM_TEMPLATES:
-        print("Warning: user_data template not found, using empty script")
-        return ""
+#     if "user_data" not in TERRAFORM_TEMPLATES:
+#         print("Warning: user_data template not found, using empty script")
+#         return ""
     
-    # Obtenez le template
-    user_data_template = TERRAFORM_TEMPLATES["user_data"]
+#     # Obtenez le template
+#     user_data_template = TERRAFORM_TEMPLATES["user_data"]
     
-    # Remplacez les variables du template avec celles de env_vars
-    user_data_script = user_data_template
+#     # Remplacez les variables du template avec celles de env_vars
+#     user_data_script = user_data_template
     
-    # Liste des variables à remplacer dans le script
-    variables_to_replace = [
-        "wordpress_domain", "wordpress_db_name", "wordpress_db_user", 
-        "wordpress_db_password", "wordpress_site_title", "wordpress_admin_user",
-        "wordpress_admin_password", "wordpress_admin_email"
-    ]
+#     # Liste des variables à remplacer dans le script
+#     variables_to_replace = [
+#         "wordpress_domain", "wordpress_db_name", "wordpress_db_user", 
+#         "wordpress_db_password", "wordpress_site_title", "wordpress_admin_user",
+#         "wordpress_admin_password", "wordpress_admin_email"
+#     ]
     
-    # Remplacer chaque occurrence
-    for var in variables_to_replace:
-        placeholder = "${" + var + "}"
-        replacement = str(env_vars.get(var, ""))
-        user_data_script = user_data_script.replace(placeholder, replacement)
+#     # Remplacer chaque occurrence
+#     for var in variables_to_replace:
+#         placeholder = "${" + var + "}"
+#         replacement = str(env_vars.get(var, ""))
+#         user_data_script = user_data_script.replace(placeholder, replacement)
 
-    print(f"\n\nUser data script:\n{user_data_script}\n\n")
+#     print(f"\n\nUser data script:\n{user_data_script}\n\n")
     
-    env_vars["user_data_script"] = user_data_script
+#     env_vars["user_data_script"] = user_data_script
 
 def main():
     """Main function to run the script."""
@@ -396,7 +396,7 @@ def main():
     # Load environment variables
     env_vars = parse_env_file(args.env)
 
-    generate_user_data(env_vars)
+    # generate_user_data(env_vars)
     
     # Determine mode (interactive or direct)
     if args.type and not args.interactive:
