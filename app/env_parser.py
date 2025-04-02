@@ -5,15 +5,13 @@ def parse_env_file(env_file_path):
     """Parse the .env file and return a dictionary of variables."""
     env_vars = {}
     
-    # Set default values for essential variables
+    # Set default values
     env_vars = {
-        # AWS Configuration
         "aws_region": "us-east-1",
         "aws_access_key_id": "",
         "aws_secret_access_key": "",
         "aws_session_token": "",
         
-        # Network Configuration
         "project_name": "wordpress-site",
         "environment": "dev",
         "vpc_cidr": "10.0.0.0/16",
@@ -24,13 +22,12 @@ def parse_env_file(env_file_path):
         "allowed_ssh_ips": ["0.0.0.0/0"],
         "allowed_http_ips": ["0.0.0.0/0"],
         
-        # EC2 Configuration
         "instance_type": "t2.micro",
-        "instance_ami": "ami-0eaf62527f5bb8940",  # Amazon Linux 2023 in us-east-1
+        "instance_ami": "ami-0eaf62527f5bb8940",
         "instance_volume_size": 20,
         "key_name": "",
         
-        # WordPress Configuration
+        
         "wordpress_domain": "",
         "wordpress_db_name": "wordpress",
         "wordpress_db_user": "wordpress",
@@ -41,8 +38,6 @@ def parse_env_file(env_file_path):
         "wordpress_admin_email": "admin@example.com",
         "wordpress_install_path": "/var/www/html",
         
-        # Optional Configuration for advanced setups
-        "wordpress_setup_script_url": "https://raw.githubusercontent.com/yourusername/wordpress-terraform/main/wordpress-setup.sh",
         "enable_s3_media": "false",
         "s3_bucket_name": "",
         "enable_cloudfront": "false",
@@ -57,7 +52,6 @@ def parse_env_file(env_file_path):
         "scale_down_cpu_threshold": 30,
     }
     
-    # If the env file exists, read its values
     if os.path.exists(env_file_path):
         print(f"Reading configuration from {env_file_path}...")
         # print(f"env file path: {}")
@@ -71,7 +65,6 @@ def parse_env_file(env_file_path):
                         key = key.strip()
                         value = value.strip()
                         
-                        # Remove quotes if present
                         if value.startswith('"') and value.endswith('"'):
                             value = value[1:-1]
                         elif value.startswith("'") and value.endswith("'"):
@@ -81,7 +74,6 @@ def parse_env_file(env_file_path):
                         bool_keys = ["USE_RDS", "ENABLE_AUTO_SCALING", "ENABLE_S3_MEDIA", "ENABLE_CLOUDFRONT"]
                         int_keys = ["RDS_STORAGE_SIZE", "MIN_INSTANCES", "MAX_INSTANCES", "SCALE_UP_CPU_THRESHOLD", "SCALE_DOWN_CPU_THRESHOLD", "INSTANCE_VOLUME_SIZE"]
                         
-                        # Map environment variables to appropriate format
                         if key in need_values_keys and value:
                             env_vars[key.lower()] = value
                         elif key in bool_keys:
@@ -94,7 +86,6 @@ def parse_env_file(env_file_path):
                         else:
                             env_vars[key.lower()] = value
                     except ValueError:
-                        # Ignore malformed lines
                         continue
     
     # Special processing
@@ -104,6 +95,6 @@ def parse_env_file(env_file_path):
     if not env_vars["wordpress_domain"]:
         env_vars["wordpress_domain"] = f"{env_vars['project_name']}.example.com"
 
-        print(f"env vars: {env_vars}")
+        # print(f"env vars: {env_vars}")
     
     return env_vars

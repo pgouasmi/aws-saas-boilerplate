@@ -142,6 +142,8 @@ clean-all: clean
 	find . -type f -name "*.pyc" -delete
 	@echo "All cleaned."
 
+re: clean cost-efficient
+
 # Help information
 .PHONY: help
 help:

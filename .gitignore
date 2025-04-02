@@ -1,5 +1,7 @@
 .env
 setup-worpress-hardcoded.sh
+setup-wordpress*.sh
+user_data_instance.sh
 __pycache__
 terraform-wordpress/
 venv

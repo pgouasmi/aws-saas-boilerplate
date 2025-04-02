@@ -19,7 +19,8 @@ WORDPRESS_ADMIN_USER="${WORDPRESS_ADMIN_USER}"
 WORDPRESS_ADMIN_PASSWORD="${WORDPRESS_ADMIN_PASSWORD}"
 WORDPRESS_ADMIN_EMAIL="${WORDPRESS_ADMIN_EMAIL}"
 WORDPRESS_INSTALL_PATH="${WORDPRESS_INSTALL_PATH}"
-KEYS_LINE_NUM = ""
+WORDPRESS_DOMAIN="$(curl -s https://checkip.amazonaws.com | tr -d '\n')"
+KEYS_LINE_NUM=""
 
 log "Démarrage de l'installation de WordPress sur Amazon Linux 2023"
 log "Domaine/IP: $WORDPRESS_DOMAIN"
@@ -34,11 +35,25 @@ dnf install -y httpd mariadb105-server php php-mysqlnd php-json php-gd php-mbstr
 log "Démarrage et activation des services httpd et mariadb..."
 systemctl start httpd >> "$LOG_FILE" 2>&1
 systemctl start mariadb >> "$LOG_FILE" 2>&1
+
+for i in {1..5}; do
+    if systemctl is-active --quiet httpd; then
+        log "Apache est démarré correctement."
+        break
+    else
+        log "Apache n'a pas démarré. Tentative $i/5..."
+        systemctl restart httpd
+        sleep 5
+    fi
+done
+
+if ! systemctl is-active --quiet httpd; then
+    log "ERREUR: Impossible de démarrer Apache après 5 tentatives."
+    exit 1
+fi
+
 systemctl enable httpd >> "$LOG_FILE" 2>&1
 systemctl enable mariadb >> "$LOG_FILE" 2>&1
-
-log "Attente du démarrage complet de MariaDB..."
-sleep 10
 
 log "Sécurisation de l'installation MariaDB..."
 
@@ -102,6 +117,7 @@ sed -i "s|database_name_here|$WORDPRESS_DB_NAME|g" $WORDPRESS_INSTALL_PATH/wp-co
 sed -i "s|username_here|$WORDPRESS_DB_USER|g" $WORDPRESS_INSTALL_PATH/wp-config.php
 sed -i "s|password_here|$WORDPRESS_DB_PASSWORD|g" $WORDPRESS_INSTALL_PATH/wp-config.php
 sed -i "s|localhost|localhost|g" $WORDPRESS_INSTALL_PATH/wp-config.php
+log ""
 
 log "Génération des clés de sécurité WordPress..."
 KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)

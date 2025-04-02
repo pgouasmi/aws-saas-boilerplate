@@ -12,13 +12,10 @@ DEPLOYMENT_TEMPLATES = {
             "vpc",
             "internet_gateway",
             "public_subnet",
-            "private_subnet",
             "route_table",
             "security_group_instance",
             "security_group_lb",
             "ec2_instance",
-            "load_balancer",
-            "target_group"
         ],
         "variable_sections": [
             "aws", 
