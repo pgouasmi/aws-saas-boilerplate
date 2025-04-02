@@ -8,6 +8,8 @@ This project enables you to quickly generate Terraform configurations to deploy 
 
 The generator uses a modular approach, where infrastructure components, variables, and deployment types are separated, making the code more maintainable and extensible.
 
+### ⚠️⚠️ As of today, the only implemented deployment type is "cost-efficient" (Single EC2 instance, Internet gateway, VPC + public subnet) ⚠️⚠️
+
 ## 🚀 Features
 
 - **Multiple deployment options**: Cost-efficient (single EC2), High-availability (multi-AZ, RDS)
