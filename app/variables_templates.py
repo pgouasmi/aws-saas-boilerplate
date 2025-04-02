@@ -6,17 +6,17 @@ variable "aws_region" {
   default     = "{aws_region}"
 }
 
-variable "aws_access_key" {
+variable "aws_access_key_id" {
   description = "AWS access key"
   type        = string
-  default     = "{aws_access_key}"
+  default     = "{aws_access_key_id}"
   sensitive   = true
 }
 
-variable "aws_secret_key" {
+variable "aws_secret_access_key" {
   description = "AWS secret key"
   type        = string
-  default     = "{aws_secret_key}"
+  default     = "{aws_secret_access_key}"
   sensitive   = true
 }
 """,
@@ -74,6 +74,12 @@ variable "instance_volume_size" {
   description = "Size of the root EBS volume attached to the EC2 instance"
   type        = number
   default     = {instance_volume_size}
+}
+
+variable "project_name" {
+  description = "Name of the project"
+  type        = string
+  default     = "{project_name}"
 }
 """,
 

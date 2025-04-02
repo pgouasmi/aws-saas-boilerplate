@@ -143,10 +143,10 @@ def generate_terraform_tfvars(deployment_type, env_vars_formatted):
     # AWS configuration
     content += "# AWS Configuration\n"
     content += f'aws_region         = "{env_vars_formatted["aws_region"]}"\n'
-    if env_vars_formatted["aws_access_key"]:
-        content += f'aws_access_key     = "{env_vars_formatted["aws_access_key"]}"\n'
-    if env_vars_formatted["aws_secret_key"]:
-        content += f'aws_secret_key     = "{env_vars_formatted["aws_secret_key"]}"\n'
+    if env_vars_formatted["aws_access_key_id"]:
+        content += f'aws_access_key_id     = "{env_vars_formatted["aws_access_key_id"]}"\n'
+    if env_vars_formatted["aws_secret_access_key"]:
+        content += f'aws_secret_access_key     = "{env_vars_formatted["aws_secret_access_key"]}"\n'
     
     # Project configuration
     content += "\n# Project Configuration\n"
