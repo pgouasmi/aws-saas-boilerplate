@@ -114,8 +114,6 @@ See `.env.example` for all available configuration options.
 4. Run `terraform init` and `terraform apply`
 5. Access your WordPress site at the provided URL
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 📞 Support
 
-If you have any questions or need help, please open an issue on GitHub or contact the maintainers directly.
+If you have any questions or need help, please open an issue on GitHub or contact me (pgouasmi) directly.
